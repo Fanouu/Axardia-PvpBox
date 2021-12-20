@@ -1,0 +1,9 @@
+name: CorePvPBox
+auhtor: "Fanouu & Lucas"
+version: 1.0
+api: [4.0.0]
+main: PvpBox\Core
+permissions:
+  levelTwo_extends.axardia.perm:
+    default: op
+    description: "staff level 2 extensions perm"
