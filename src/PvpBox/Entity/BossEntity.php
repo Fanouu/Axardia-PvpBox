@@ -1,0 +1,3 @@
+<?php
+
+namespace PvpBox\Entity;
