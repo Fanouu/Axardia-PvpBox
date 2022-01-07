@@ -23,32 +23,36 @@ class PlayerChat implements Listener{
         $rankAPI = new RankManager();
         $rank = $rankAPI->getRank($player);
         $rankAPI->rankNoExists($player);
-
+        
+        $eloLevel = str_replace([0, 1, 2, 3], ["", "I", "II", "III"], $rankAPI->getEloLevel($player));
+        $eloRank = $rankAPI->getEloRank($player);
+        $elo = $rankAPI->getEloLevel($player) === 0 ? "$eloRank" : "$eloRank §d$eloLevel";
+      
         if($rank === "Player"){
-            return "§5[§7Joueur§5] §f{$player->getName()} §r§5» §f$messages";
+            return "$elo §5[§7Joueur§5] §f{$player->getName()} §r§5» §f$messages";
         }
 
         if($rank === "Admin"){
-            return "§4[§cAdministrateur§4] §f{$player->getName()} §r§5» §f$messages";
+            return "$elo §4[§cAdministrateur§4] §f{$player->getName()} §r§5» §f$messages";
         }
         if($rank === "Modérateur"){
-            return "§2[§aModérateur§2] §f{$player->getName()} §r§5» §f$messages";
+            return "$elo §2[§aModérateur§2] §f{$player->getName()} §r§5» §f$messages";
         }
 
         if($rank === "Responsable"){
-            return "§5[§dRésponsable§5] §f{$player->getName()} §r§5» §f$messages";
+            return "$elo §5[§dRésponsable§5] §f{$player->getName()} §r§5» §f$messages";
         }
 
         /*if($rank === "Responsable"){
             return "§5[§dRésponsable§5] §f{$player->getName()} §r§5» §f$messages";
         }*/
 
-        if($rank === "Développeur"){
-            return "§9[§bDéveloppeur§9] §f{$player->getName()} §r§5» §f$messages";
+        if($rank === "Developpeur"){
+            return "$elo §9[§bDéveloppeur§9] §f{$player->getName()} §r§5» §f$messages";
         }
 
         if($rank === "Guide"){
-            return "§1[§9Guide§1] §f{$player->getName()} §r§5» §f$messages";
+            return "$elo §1[§9Guide§1] §f{$player->getName()} §r§5» §f$messages";
         }
         
     }

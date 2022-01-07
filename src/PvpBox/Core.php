@@ -16,7 +16,8 @@ class Core extends PluginBase{
         Loader::loadEvents();
         Loader::loadCommands();
         Loader::loadTasks();
-        @mkdir($this->getDataFolder()."PlayerData/");
+        Loader::loadCustomItem();
+        Loader::loadDirectory();
         $this->getLogger()->info("§dAxaridaCore §5-§d PvpBox§f, loaded !");
     }
 

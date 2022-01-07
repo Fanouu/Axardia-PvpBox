@@ -85,15 +85,13 @@ class CommandForm{
             }
             $player2 = $player->getServer()->getPlayerExact($this->ToPlayer);
             $rankAPI = new RankManager();
+
+            $old_rank = $rankAPI->getRank($player2);
+            $player->clearAttachment();
             $rankAPI->setRank($player2, RankPerm::rank[(int)$data[0]]);
-            //foreach(RankPerm::perms[RankPerm::rank[(int)$data[0]]] as $valu => $perms){
-                $attachment = $this->getAttachment($player2);
-                $perm = RankPerm::perms[RankPerm::rank[(int)$data[0]]];
-                $attachment->setPermissions($perm, true);
-                foreach($perm as $value => $perms){
-                    $player2->sendMessage("$value => $perms");
-                }
-            //}
+            foreach(RankPerm::perms[RankPerm::rank[(int)$data[0]]] as $valu => $perms){
+                $player2->addAttachment(Core::getInstance(), $perms, true);
+            }
             return true;
         });
         $form->setTitle(UserInterface::SETRANK_TITLE);

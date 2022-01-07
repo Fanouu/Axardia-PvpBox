@@ -24,17 +24,22 @@ class MoneyManager{
         $this->setData($player, "CurrentMoney", 0);
     }
 
+    public function moneyNoExists(Player $player){
+        if($this->getData($player, "CurrentMoney") == null){
+            $this->setData($player, "CurrentMoney", 2000);
+        }
+    }
+
     public function getData(Player $player, $data){
         $pdata = new Config(Core::getInstance()->getDataFolder() . "PlayerData/" . $player->getName() . ".json", Config::JSON);
         return $pdata->getNested("Money.$data");
     }
 
-    public function setData(Player $player, $data, $toSet){
-        $this->data->setNested("Money.$data", $toSet);
+    public function setData(Player $player, $datas, $toSet){
+        $pdata = new Config(Core::getInstance()->getDataFolder() . "PlayerData/" . $player->getName() . ".json", Config::JSON);
+        $pdata->setNested("Money.$datas", $toSet);
+        $pdata->save();
     }
 
-    public function data(Player $player){
-        return new Config(Core::getInstance()->getDataFolder() . "PlayerData/" . $player->getName() . ".json", Config::JSON);
-    }
     
 }
